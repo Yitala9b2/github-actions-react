@@ -1,7 +1,7 @@
-name: deploy
+name: deploy app
 on: push
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Get the repository code
