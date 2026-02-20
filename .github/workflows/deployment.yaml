@@ -38,7 +38,7 @@ jobs:
     needs: [test, lint]
     strategy:
       matrix:
-        node-version: [14, 16] # node version
+        node-version: [16.x] # node version
         os: [ubuntu-latest, macos-latest] #на каких операционных системах
     runs-on: ${{ matrix.os }}
     steps:
