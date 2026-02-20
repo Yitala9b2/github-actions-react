@@ -3,12 +3,19 @@ on:
   push:
     branches:
       - master
+    #paths-ignore:
+    #  - '.github/workflows/*' проигнорировать путь в рамках workflow
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Get the repository code
         uses: actions/checkout@v6
+      - name: Cache deps
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Tests app
@@ -19,6 +26,11 @@ jobs:
     steps:
       - name: Get the repository code
         uses: actions/checkout@v6
+      - name: Cache deps
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Lint app
@@ -29,6 +41,11 @@ jobs:
     steps:
       - name: Get the repository code
         uses: actions/checkout@v6
+      - name: Cache deps
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Build app
